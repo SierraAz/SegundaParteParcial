@@ -1,0 +1,80 @@
+class Nodo:
+    def __init__(self, dato):
+        self.dato = dato
+        self.izquierda = None
+        self.derecha = None
+
+class Arbol:
+    
+    def __init__(self, dato):
+        self.raiz = Nodo(dato)
+
+    def __agregar_valores(self, nodo, dato):
+        if dato < nodo.dato:
+            if nodo.izquierda is None:
+                nodo.izquierda = Nodo(dato)
+            else:
+                self.__agregar_valores(nodo.izquierda, dato)
+        else:
+            if nodo.derecha is None:
+                nodo.derecha = Nodo(dato)
+            else:
+                self.__agregar_valores(nodo.derecha, dato)
+
+    def __recorrido_inorden(self, nodo):
+        if nodo is not None:
+            self.__recorrido_inorden(nodo.izquierda)
+            print(nodo.dato, end=", ")
+            self.__recorrido_inorden(nodo.derecha)
+
+    def __recorrido_preorden(self, nodo):
+        if nodo is not None:
+            print(nodo.dato, end=", ")
+            self.__recorrido_preorden(nodo.izquierda)
+            self.__recorrido_preorden(nodo.derecha)
+
+    def __recorrido_postorden(self, nodo):
+        if nodo is not None:
+            self.__recorrido_postorden(nodo.izquierda)
+            self.__recorrido_postorden(nodo.derecha)
+            print(nodo.dato, end=", ")
+
+
+
+    def agregar(self, dato):
+        self.__agregar_valores(self.raiz, dato)
+
+    def inorden(self):
+        print("Imprimiendo árbol inorden: ")
+        self.__recorrido_inorden(self.raiz)
+        print("")
+
+    def preorden(self):
+        print("Imprimiendo árbol preorden: ")
+        self.__recorrido_preorden(self.raiz)
+        print("")
+
+    def postorden(self):
+        print("Imprimiendo árbol postorden: ")
+        self.__recorrido_postorden(self.raiz)
+        print("")
+
+
+
+arbol_numeros = Arbol(12)
+arbol_numeros.agregar(998)
+arbol_numeros.agregar(44)
+arbol_numeros.agregar(2)
+arbol_numeros.agregar(77)
+arbol_numeros.agregar(14)
+arbol_numeros.agregar(88)
+arbol_numeros.agregar(165)
+arbol_numeros.agregar(64)
+arbol_numeros.agregar(7)
+arbol_numeros.agregar(1)
+arbol_numeros.agregar(258)
+numero= int(input("Ingrese un numero para meterlo en el arbol: "))
+arbol_numeros.agregar(numero)
+arbol_numeros.preorden()
+arbol_numeros.inorden()
+arbol_numeros.postorden()
